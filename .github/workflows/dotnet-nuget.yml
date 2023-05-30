@@ -1,0 +1,51 @@
+name: Build and Pack on Nuget
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'src/CustomLibrary.EFCore/**' ]
+  workflow_dispatch:
+
+env:
+  NET_VERSION: '6.x'
+  PROJECT_NAME: src/CustomLibrary.EFCore
+  PROJECT_FILE: CustomLibrary.EFCore.csproj
+  RELEASE_NAME: CustomLibrary.EFCore
+
+jobs:
+  build:
+    name: Publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup .NET Core SDK ${{ env.NET_VERSION }}
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.NET_VERSION }}
+
+    - name: Nerdbank.GitVersioning 
+      uses: dotnet/nbgv@master
+      id: nbgv
+      with:        
+        path: ${{ env.PROJECT_NAME }}
+
+    - name: Package
+      run: dotnet pack -c Release -o . '${{ env.PROJECT_NAME }}/${{ env.PROJECT_FILE }}' -p:Version=${{ steps.gitversion.outputs.SemVer }}
+
+    - name: Publish on NuGet
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json --no-symbols --skip-duplicate
+
+    - name: Create release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          tag_name: v${{ steps.nbgv.outputs.NuGetPackageVersion }}
+          release_name: ${{ env.RELEASE_NAME }} ${{ steps.nbgv.outputs.NuGetPackageVersion }}
+          draft: false
+          prerelease: false
