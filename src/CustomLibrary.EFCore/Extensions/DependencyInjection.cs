@@ -7,7 +7,7 @@ namespace CustomLibrary.EFCore.Extensions;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDbContextGenericsMethods<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextGenerics<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
     {
         services.AddScoped<DbContext, TDbContext>();
         services.AddScoped(typeof(IUnitOfWork<,>), typeof(UnitOfWork<,>));
@@ -17,7 +17,7 @@ public static class DependencyInjection
         return services;
     }
 
-    //public static IServiceCollection AddDbContextTransactionMethods<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
+    //public static IServiceCollection AddDbContextTransaction<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
     //{
     //    services.AddScoped<DbContext, TDbContext>();
     //    services.AddScoped(typeof(ITUnitOfWork<,>), typeof(TUnitOfWork<,>));
