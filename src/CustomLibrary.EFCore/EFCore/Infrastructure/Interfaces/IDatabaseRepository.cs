@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using NET6CustomLibrary.EFCore;
-
-namespace CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
+﻿namespace CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
 
 public interface IDatabaseRepository<TEntity, TKey> : IDatabase<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {
