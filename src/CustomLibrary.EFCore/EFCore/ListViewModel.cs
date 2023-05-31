@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NET6CustomLibrary.EFCore;
+﻿namespace NET6CustomLibrary.EFCore;
 
 public class ListViewModel<T>
 {

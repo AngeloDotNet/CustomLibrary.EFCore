@@ -1,9 +1,4 @@
-﻿using System;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
-namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
+﻿namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
 
 public class UnitOfWork<TEntity, TKey> : IUnitOfWork<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {

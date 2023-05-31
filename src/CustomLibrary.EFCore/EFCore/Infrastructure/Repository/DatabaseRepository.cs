@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CustomLibrary.EFCore.EFCore.Core;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using NET6CustomLibrary.EFCore;
+﻿
 
 namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
 

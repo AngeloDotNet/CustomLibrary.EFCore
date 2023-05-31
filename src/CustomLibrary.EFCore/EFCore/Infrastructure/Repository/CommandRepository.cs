@@ -1,7 +1,4 @@
-﻿using CustomLibrary.EFCore.EFCore.Core;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿
 
 namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
 
