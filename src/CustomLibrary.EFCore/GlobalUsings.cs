@@ -1,0 +1,11 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading.Tasks;
+global using CustomLibrary.EFCore.EFCore.Core;
+global using CustomLibrary.EFCore.EFCore.Core.Interfaces;
+global using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
+global using CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using NET6CustomLibrary.EFCore;

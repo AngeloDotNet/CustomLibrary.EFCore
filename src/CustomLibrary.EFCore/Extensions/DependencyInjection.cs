@@ -1,9 +1,4 @@
-﻿using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
-using CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace CustomLibrary.EFCore.Extensions;
+﻿namespace CustomLibrary.EFCore.Extensions;
 
 public static class DependencyInjection
 {
@@ -28,10 +23,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddDbContextForMySql<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
-        if ((migrationsAssembly == null) || (migrationsAssembly == string.Empty))
-        {
-            migrationsAssembly = typeof(TDbContext).Assembly.FullName;
-        }
+        //migrationsAssembly = generatePathMigrations<TDbContext>(migrationsAssembly);
 
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -43,7 +35,7 @@ public static class DependencyInjection
                     // Info su: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                     options.EnableRetryOnFailure(retryOnFailure);
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
             else
@@ -51,7 +43,7 @@ public static class DependencyInjection
                 optionBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), options =>
                 {
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
         });
@@ -60,10 +52,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddDbContextUsePostgres<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
-        if ((migrationsAssembly == null) || (migrationsAssembly == string.Empty))
-        {
-            migrationsAssembly = typeof(TDbContext).Assembly.FullName;
-        }
+        //migrationsAssembly = generatePathMigrations<TDbContext>(migrationsAssembly);
 
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -75,7 +64,7 @@ public static class DependencyInjection
                     // Info su: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                     options.EnableRetryOnFailure(retryOnFailure);
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
             else
@@ -83,7 +72,7 @@ public static class DependencyInjection
                 optionBuilder.UseNpgsql(connectionString, options =>
                 {
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
         });
@@ -93,10 +82,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddDbContextUseSQLServer<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
-        if ((migrationsAssembly == null) || (migrationsAssembly == string.Empty))
-        {
-            migrationsAssembly = typeof(TDbContext).Assembly.FullName;
-        }
+        //migrationsAssembly = generatePathMigrations<TDbContext>(migrationsAssembly);
 
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -108,7 +94,7 @@ public static class DependencyInjection
                     // Info su: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency
                     options.EnableRetryOnFailure(retryOnFailure);
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
             else
@@ -116,7 +102,7 @@ public static class DependencyInjection
                 optionBuilder.UseSqlServer(connectionString, options =>
                 {
                     //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                    options.MigrationsAssembly(migrationsAssembly);
+                    options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
                 });
             }
         });
@@ -126,10 +112,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddDbContextUseSQLite<TDbContext>(this IServiceCollection services, string connectionString, string migrationsAssembly) where TDbContext : DbContext
     {
-        if ((migrationsAssembly == null) || (migrationsAssembly == string.Empty))
-        {
-            migrationsAssembly = typeof(TDbContext).Assembly.FullName;
-        }
+        //migrationsAssembly = generatePathMigrations<TDbContext>(migrationsAssembly);
 
         services.AddDbContextPool<TDbContext>(optionsBuilder =>
         {
@@ -137,10 +120,20 @@ public static class DependencyInjection
             {
                 // Non abilito il connection resiliency, non è supportato dal provider di Sqlite in quanto non soggetto a errori transienti)
                 //options.MigrationsAssembly(typeof(TDbContext).Assembly.FullName);
-                options.MigrationsAssembly(migrationsAssembly);
+                options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
             });
         });
 
         return services;
+    }
+
+    private static string GeneratePathMigrations<TDbContext>(string migrationsAssembly) where TDbContext : DbContext
+    {
+        if ((migrationsAssembly == null) || (migrationsAssembly == string.Empty))
+        {
+            migrationsAssembly = typeof(TDbContext).Assembly.FullName;
+        }
+
+        return migrationsAssembly;
     }
 }
