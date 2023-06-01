@@ -6,15 +6,13 @@
 If you found this Implementation helpful or used it in your Projects, do give it a :star: on Github. Thanks!
 
 
-<!--
 ## :dvd: Installation
 
-The library is available on [NuGet](https://www.nuget.org/packages/NET6CustomLibrary) or run the following command in the .NET CLI:
+The library is available on [NuGet](https://www.nuget.org/packages/CustomLibrary.EFCore) or run the following command in the .NET CLI:
 
 ```bash
-dotnet add package NET6CustomLibrary
+dotnet add package CustomLibrary.EFCore
 ```
--->
 
 
 ## :memo: Library documentation
