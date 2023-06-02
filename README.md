@@ -54,18 +54,18 @@ public void ConfigureServices(IServiceCollection services)
   "Default": "Server=[SERVER];Database=[DATABASE];Uid=[USERNAME];Pwd=[PASSWORD];Port=3306"
 }
 
-// for database PostgreSQL
+//for database PostgreSQL
 "ConnectionStrings": {
   "Default": "Host=[SERVER];Port=5432;Database=[DATABASE];Username=[USERNAME];Password=[PASSWORD]"
 }
 
-// for database SQLServer
+//for database SQLServer
 "ConnectionStrings": {
   "Default": "Data Source=[SERVER];Initial Catalog=[DATABASE];User ID=[USERNAME];Password=[PASSWORD]"
-  //or "Default": "Data Source=[SERVER];Initial Catalog=[DATABASE];User ID=[USERNAME];Password=[PASSWORD];Encrypt=False"
+//or "Default": "Data Source=[SERVER];Initial Catalog=[DATABASE];User ID=[USERNAME];Password=[PASSWORD];Encrypt=False"
 }
 
-// for database SQLite
+//for database SQLite
 "ConnectionStrings": {
     "Default": "Data Source=Data/MyDatabase.db"
 }
