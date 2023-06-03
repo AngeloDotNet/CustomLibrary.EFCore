@@ -3,15 +3,14 @@
 public class UnitOfWork<TEntity, TKey> : IUnitOfWork<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {
     public DbContext DbContext { get; }
-    public IDatabaseRepository<TEntity, TKey> ReadOnly { get; }
-    public ICommandRepository<TEntity, TKey> Command { get; }
+    public ICoreDatabase<TEntity, TKey> ReadOnly { get; }
+    public ICoreCommand<TEntity, TKey> Command { get; }
 
-    public UnitOfWork(DbContext dbContext, IDatabaseRepository<TEntity, TKey> databaseRepository, ICommandRepository<TEntity, TKey> commandRepository)
+    public UnitOfWork(DbContext dbContext, ICoreDatabase<TEntity, TKey> coreDatabase, ICoreCommand<TEntity, TKey> coreCommand)
     {
         DbContext = dbContext;
-
-        ReadOnly = databaseRepository;
-        Command = commandRepository;
+        ReadOnly = coreDatabase;
+        Command = coreCommand;
     }
 
     public void Dispose()

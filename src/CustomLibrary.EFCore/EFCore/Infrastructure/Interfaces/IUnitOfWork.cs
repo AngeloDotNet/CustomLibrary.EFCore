@@ -2,6 +2,6 @@
 
 public interface IUnitOfWork<TEntity, TKey> : IDisposable where TEntity : class, IEntity<TKey>, new()
 {
-    IDatabaseRepository<TEntity, TKey> ReadOnly { get; }
-    ICommandRepository<TEntity, TKey> Command { get; }
+    ICoreDatabase<TEntity, TKey> ReadOnly { get; }
+    ICoreCommand<TEntity, TKey> Command { get; }
 }

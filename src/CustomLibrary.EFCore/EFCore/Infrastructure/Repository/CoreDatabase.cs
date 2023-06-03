@@ -1,10 +1,8 @@
-﻿
+﻿namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
 
-namespace CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
-
-public class DatabaseRepository<TEntity, TKey> : Database<TEntity, TKey>, IDatabaseRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
+public class CoreDatabase<TEntity, TKey> : Database<TEntity, TKey>, ICoreDatabase<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {
-    public DatabaseRepository(DbContext dbContext) : base(dbContext)
+    public CoreDatabase(DbContext dbContext) : base(dbContext)
     {
     }
 
@@ -14,9 +12,7 @@ public class DatabaseRepository<TEntity, TKey> : Database<TEntity, TKey>, IDatab
             .AsNoTracking()
             .ToListAsync();
 
-        var itemCount = result.Count;
-
-        return itemCount;
+        return result.Count;
     }
 
     public async Task<List<TEntity>> GetOrderByIdAscendingAsync()
