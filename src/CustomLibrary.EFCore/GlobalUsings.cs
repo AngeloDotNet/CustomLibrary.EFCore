@@ -6,6 +6,7 @@ global using CustomLibrary.EFCore.EFCore.Core;
 global using CustomLibrary.EFCore.EFCore.Core.Interfaces;
 global using CustomLibrary.EFCore.EFCore.Infrastructure.Interfaces;
 global using CustomLibrary.EFCore.EFCore.Infrastructure.Repository;
+global using HealthChecks.UI.Client;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
 global using NET6CustomLibrary.EFCore;
