@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
-namespace CustomLibrary.EFCore.EFCore.Core;
+﻿namespace CustomLibrary.EFCore.EFCore.Core;
 
 public class Command<TEntity, TKey> : ICommand<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {

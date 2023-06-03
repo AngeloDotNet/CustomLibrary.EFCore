@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace CustomLibrary.EFCore.EFCore.Core.Interfaces;
+﻿namespace CustomLibrary.EFCore.EFCore.Core.Interfaces;
 
 public interface IDatabase<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {

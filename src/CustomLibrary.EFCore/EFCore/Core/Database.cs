@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using CustomLibrary.EFCore.EFCore.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
-namespace CustomLibrary.EFCore.EFCore.Core;
+﻿namespace CustomLibrary.EFCore.EFCore.Core;
 
 public class Database<TEntity, TKey> : IDatabase<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {

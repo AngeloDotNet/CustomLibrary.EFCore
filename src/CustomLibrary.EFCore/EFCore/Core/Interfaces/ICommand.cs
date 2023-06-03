@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace CustomLibrary.EFCore.EFCore.Core.Interfaces;
+﻿namespace CustomLibrary.EFCore.EFCore.Core.Interfaces;
 
 public interface ICommand<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {
