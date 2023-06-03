@@ -1,4 +1,4 @@
-# Custom Library Entity Framework Core (EFCore)
+# Custom Library Entity Framework Core
 
 ## :star: Give a star
 If you found this Implementation helpful or used it in your Projects, do give it a :star: on Github. Thanks!
@@ -14,7 +14,7 @@ dotnet add package CustomLibrary.EFCore
 The extensions methods available regarding:
 
 - [x] DBContext generic methods<br>
-- [x] DBContext Pool for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server)
+- [x] DBContext Pool registration for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server)
 - [ ] Health checks with UI for different databases (MySQL / MariaDB, PostgreSQL, SQL server)
 
 ## Registering services at Startup
@@ -33,7 +33,7 @@ public void ConfigureServices(IServiceCollection services)
   services.AddDbContextGenericsMethods<MyDbContext>();
 
   //if you use MySQL database
-  services.AddDbContextForMySql(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextUseMySql(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use PostgreSQL database
   services.AddDbContextUsePostgres(connectionString, retryOnFailure, migrationsAssembly);
