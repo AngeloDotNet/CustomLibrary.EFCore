@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
-
-namespace CustomLibrary.EFCore.Extensions;
+﻿namespace CustomLibrary.EFCore.Extensions;
 
 public static class DependencyInjection
 {
@@ -14,7 +9,7 @@ public static class DependencyInjection
     /// </summary>
     /// <typeparam name="TDbContext"></typeparam>
     /// <returns>Registration of services</returns>
-    public static IServiceCollection AddDbContextGenerics<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextServicesGenerics<TDbContext>(this IServiceCollection services) where TDbContext : DbContext
     {
         services.AddScoped<DbContext, TDbContext>();
         services.AddScoped(typeof(IUnitOfWork<,>), typeof(UnitOfWork<,>));
@@ -33,7 +28,7 @@ public static class DependencyInjection
     /// <param name="retryOnFailure"></param>
     /// <param name="migrationsAssembly"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDbContextUseMySql<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextForMySql<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -67,7 +62,7 @@ public static class DependencyInjection
     /// <param name="retryOnFailure"></param>
     /// <param name="migrationsAssembly"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDbContextUsePostgres<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextForPostgres<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -102,7 +97,7 @@ public static class DependencyInjection
     /// <param name="retryOnFailure"></param>
     /// <param name="migrationsAssembly"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDbContextUseSQLServer<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextForSQLServer<TDbContext>(this IServiceCollection services, string connectionString, int retryOnFailure, string migrationsAssembly) where TDbContext : DbContext
     {
         services.AddDbContextPool<TDbContext>(optionBuilder =>
         {
@@ -136,7 +131,7 @@ public static class DependencyInjection
     /// <param name="connectionString"></param>
     /// <param name="migrationsAssembly"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDbContextUseSQLite<TDbContext>(this IServiceCollection services, string connectionString, string migrationsAssembly) where TDbContext : DbContext
+    public static IServiceCollection AddDbContextForSQLite<TDbContext>(this IServiceCollection services, string connectionString, string migrationsAssembly) where TDbContext : DbContext
     {
         services.AddDbContextPool<TDbContext>(optionsBuilder =>
         {
@@ -169,12 +164,12 @@ public static class DependencyInjection
 
     #endregion
 
-    #region "HEALTH CHECKS WITH UI"
-    public static IServiceCollection AddHealthChecksSQLite<TDbContext>(this IServiceCollection services, string webAddressGroup, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    #region "Health Checks with UI"
+    public static IServiceCollection AddHealthChecksUISQLite<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(webAddressGroup), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddSqlite(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -185,11 +180,11 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksSQLServer<TDbContext>(this IServiceCollection services, string webAddressGroup, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUISQLServer<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(webAddressGroup), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddSqlServer(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -200,11 +195,11 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksMySQL<TDbContext>(this IServiceCollection services, string webAddressGroup, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIMySQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(webAddressGroup), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddMySql(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -215,11 +210,11 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressGroup, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(webAddressGroup), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddNpgSql(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -230,7 +225,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static WebApplication UseHealthChecksConfigure(this WebApplication app)
+    public static WebApplication UseHealthChecksUI(this WebApplication app)
     {
         app.UseHealthChecks("/healthz", new HealthCheckOptions
         {
