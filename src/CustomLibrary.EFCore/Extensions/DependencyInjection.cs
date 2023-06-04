@@ -180,7 +180,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUISQLServer<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUISQLServer<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString, int pollingInterval = 5) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
@@ -190,12 +190,13 @@ public static class DependencyInjection
         services.AddHealthChecksUI(setupSettings: setup =>
         {
             setup.AddHealthCheckEndpoint("Health Check", $"/healthz");
+            setup.SetEvaluationTimeInSeconds(pollingInterval);
         }).AddInMemoryStorage();
 
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUIMySQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIMySQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString, int pollingInterval = 5) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
@@ -205,12 +206,13 @@ public static class DependencyInjection
         services.AddHealthChecksUI(setupSettings: setup =>
         {
             setup.AddHealthCheckEndpoint("Health Check", $"/healthz");
+            setup.SetEvaluationTimeInSeconds(pollingInterval);
         }).AddInMemoryStorage();
 
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUIPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString, int pollingInterval = 5) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
@@ -220,6 +222,7 @@ public static class DependencyInjection
         services.AddHealthChecksUI(setupSettings: setup =>
         {
             setup.AddHealthCheckEndpoint("Health Check", $"/healthz");
+            setup.SetEvaluationTimeInSeconds(pollingInterval);
         }).AddInMemoryStorage();
 
         return services;
