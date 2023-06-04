@@ -165,12 +165,12 @@ public static class DependencyInjection
     #endregion
 
     #region "Health Checks with UI"
-    public static IServiceCollection AddHealthChecksUISQLite<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUISQLite<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
-            .AddSqlite(sqliteConnString);
+            .AddUrlGroup(new Uri("https://angelodotnet.github.io/"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddSqlite(dbConnectionString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
         {
@@ -180,12 +180,12 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUISQLServer<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUISQLServer<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
-            .AddSqlServer(sqliteConnString);
+            .AddUrlGroup(new Uri("https://angelodotnet.github.io/"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddSqlServer(dbConnectionString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
         {
@@ -195,12 +195,12 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUIMySQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIMySQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
-            .AddMySql(sqliteConnString);
+            .AddUrlGroup(new Uri("https://angelodotnet.github.io/"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddMySql(dbConnectionString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
         {
@@ -210,12 +210,12 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddHealthChecksUIPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string sqliteConnString) where TDbContext : DbContext
+    public static IServiceCollection AddHealthChecksUIPostgreSQL<TDbContext>(this IServiceCollection services, string webAddressTitle, string dbConnectionString) where TDbContext : DbContext
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
-            .AddNpgSql(sqliteConnString);
+            .AddUrlGroup(new Uri("https://angelodotnet.github.io/"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddNpgSql(dbConnectionString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
         {
