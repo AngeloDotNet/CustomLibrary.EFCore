@@ -35,20 +35,19 @@ public void ConfigureServices(IServiceCollection services)
   //or you can customize the assembly for migrations using the syntax
   string migrationsAssembly = "MyAssembly.Migrations.MySQLDatabase";
 
-  services.AddDbContextGenericsMethods<MyDbContext>();
+  services.AddDbContextServicesGenerics<MyDbContext>();
 
   //if you use MySQL database
-  services.AddDbContextUseMySql(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForMySql(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use PostgreSQL database
-  services.AddDbContextUsePostgres(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForPostgres(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use SQLServer database
-  services.AddDbContextUseSQLServer(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForSQLServer(connectionString, retryOnFailure, migrationsAssembly);
 
-  //if you use SQLite database
-  //in this case the retryOnFailure is not necessary as SQLite is not subject to transient errors
-  services.AddDbContextUseSQLite(connectionString, migrationsAssembly);
+  //if you use SQLite database but in this case the retryOnFailure is not necessary as SQLite is not subject to transient errors
+  services.AddDbContextForSQLite(connectionString, migrationsAssembly);
 }
 ```
 
@@ -76,13 +75,25 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-## Example entity interface
+## Example entity
 ```csharp
 public class MyEntity : IEntity<int>
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
+}
+```
+
+## Example interface
+```csharp
+public interface IMyService
+{
+    Task<List<MyEntity>> GetListItemAsync();
+    Task<MyEntity> GetItemAsync(int id);
+    Task CreateItemAsync(MyEntity item);
+    Task UpdateItemAsync(MyEntity item);
+    Task DeleteItemAsync(MyEntity item);
 }
 ```
 
@@ -123,18 +134,6 @@ public class MyService : IMyService
     {
         await unitOfWork.Command.DeleteAsync(item);
     }
-}
-```
-
-## Example interface
-```csharp
-public interface IMyService
-{
-    Task<List<MyEntity>> GetListItemAsync();
-    Task<MyEntity> GetItemAsync(int id);
-    Task CreateItemAsync(MyEntity item);
-    Task UpdateItemAsync(MyEntity item);
-    Task DeleteItemAsync(MyEntity item);
 }
 ```
 
