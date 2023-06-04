@@ -169,7 +169,7 @@ public static class DependencyInjection
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddSqlite(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -184,7 +184,7 @@ public static class DependencyInjection
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddSqlServer(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -199,7 +199,7 @@ public static class DependencyInjection
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddMySql(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
@@ -214,7 +214,7 @@ public static class DependencyInjection
     {
         services.AddHealthChecks()
             .AddDbContextCheck<TDbContext>(name: "Application DB Context", failureStatus: HealthStatus.Degraded)
-            .AddUrlGroup(new Uri(string.Empty), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
+            .AddUrlGroup(new Uri("about:blank"), name: webAddressTitle, failureStatus: HealthStatus.Degraded)
             .AddNpgSql(sqliteConnString);
 
         services.AddHealthChecksUI(setupSettings: setup =>
