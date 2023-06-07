@@ -19,6 +19,7 @@ dotnet add package CustomLibrary.EFCore
 The extensions methods available regarding:
 
 - [x] DBContext generic methods<br>
+- [x] DBContext registration for different databases (SQL server)
 - [x] DBContext Pool registration for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server)
 - [ ] Health checks with UI for different databases (MySQL / MariaDB, PostgreSQL, SQL server)
 
@@ -45,6 +46,7 @@ public void ConfigureServices(IServiceCollection services)
 
   //if you use SQLServer database
   services.AddDbContextForSQLServer(connectionString, retryOnFailure, migrationsAssembly);
+  //or services.AddDbContextNoPoolSQLServer(connectionString, migrationsAssembly); //if you don't want to use the connection pool
 
   //if you use SQLite database but in this case the retryOnFailure is not necessary as SQLite is not subject to transient errors
   services.AddDbContextForSQLite(connectionString, migrationsAssembly);
