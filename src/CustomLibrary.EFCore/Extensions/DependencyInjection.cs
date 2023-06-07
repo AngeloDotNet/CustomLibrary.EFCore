@@ -145,6 +145,23 @@ public static class DependencyInjection
         return services;
     }
 
+    public static IServiceCollection AddDbContextNoPoolSQLServer<TDbContext>(this IServiceCollection services, string connectionString, string migrationsAssembly) where TDbContext : DbContext
+    {
+        services.AddDbContext<TDbContext>(optionBuilder =>
+        {
+            optionBuilder.UseSqlServer(connectionString, options =>
+            {
+                options.MigrationsAssembly(GeneratePathMigrations<TDbContext>(migrationsAssembly: migrationsAssembly));
+            });
+            //optionBuilder.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+            //{
+            //    sqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+            //});
+        });
+
+        return services;
+    }
+
     private static string GeneratePathMigrations<TDbContext>(string migrationsAssembly) where TDbContext : DbContext
     {
         string result;
