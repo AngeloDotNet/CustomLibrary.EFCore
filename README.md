@@ -18,10 +18,12 @@ dotnet add package CustomLibrary.EFCore
 ## :memo: Library documentation
 The extensions methods available regarding:
 
-- [x] DBContext generic methods<br>
-- [x] DBContext registration for different databases (SQL server)
-- [x] DBContext Pool registration for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server)
-- [ ] Health checks with UI for different databases (MySQL / MariaDB, PostgreSQL, SQL server)
+|  | Extensions methods |
+| --- | --- |
+| x | DBContext generic methods |
+| x | DBContext registration for different databases (SQL server) |
+| x | DBContext Pool registration for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server) |
+|   | Health checks with UI for different databases (MySQL / MariaDB, PostgreSQL, SQL server) |
 
 ## Registering services at Startup
 ```csharp
