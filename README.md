@@ -22,7 +22,7 @@ The extensions methods available regarding:
 | --- | --- |
 | DBContext generic methods | [Read docs](https://github.com/AngeloDotNet/CustomLibrary.EFCore/tree/main/src/CustomLibrary.EFCore/Docs/DBContext-GenericMethods.md) |
 | DBContext registration for databases SQL server | [Read docs](https://github.com/AngeloDotNet/CustomLibrary.EFCore/tree/main/src/CustomLibrary.EFCore/Docs/DBContextPoolRegistrationDifferentDatabases.md) |
-| DBContext Pool registration for different databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server) | [Read docs](https://github.com/AngeloDotNet/CustomLibrary.EFCore/tree/main/src/CustomLibrary.EFCore/Docs/DBContextRegistrationDatabases.md) |
+| DBContext Pool registration for databases (MySQL / MariaDB, PostgreSQL, SQLite, SQL server) | [Read docs](https://github.com/AngeloDotNet/CustomLibrary.EFCore/tree/main/src/CustomLibrary.EFCore/Docs/DBContextRegistrationDatabases.md) |
 | Health checks with UI for different databases (MySQL / MariaDB, PostgreSQL, SQL server) | coming soon |
 
 ## :muscle: Contributing
