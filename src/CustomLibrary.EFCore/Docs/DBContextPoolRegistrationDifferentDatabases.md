@@ -16,16 +16,16 @@ public void ConfigureServices(IServiceCollection services)
   services.AddDbContextServicesGenerics<MyDbContext>();
 
   //if you use MySQL database
-  services.AddDbContextForMySql(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForMySql<MyDbContext>(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use PostgreSQL database
-  services.AddDbContextForPostgres(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForPostgres<MyDbContext>(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use SQLServer database
-  services.AddDbContextForSQLServer(connectionString, retryOnFailure, migrationsAssembly);
+  services.AddDbContextForSQLServer<MyDbContext>(connectionString, retryOnFailure, migrationsAssembly);
 
   //if you use SQLite database but in this case the retryOnFailure is not necessary as SQLite is not subject to transient errors
-  services.AddDbContextForSQLite(connectionString, migrationsAssembly);
+  services.AddDbContextForSQLite<MyDbContext>(connectionString, migrationsAssembly);
 }
 ```
 

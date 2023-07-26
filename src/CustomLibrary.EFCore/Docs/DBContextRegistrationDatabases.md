@@ -11,7 +11,7 @@ public void ConfigureServices(IServiceCollection services)
   string migrationsAssembly = "MyAssembly.Migrations.MySQLDatabase";
 
   services.AddDbContextServicesGenerics<MyDbContext>();
-  services.AddDbContextNoPoolSQLServer(connectionString, migrationsAssembly);
+  services.AddDbContextNoPoolSQLServer<MyDbContext>(connectionString, migrationsAssembly);
 }
 ```
 
