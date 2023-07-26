@@ -2,11 +2,6 @@
 
 public interface ICoreDatabase<TEntity, TKey> : IDatabase<TEntity, TKey> where TEntity : class, IEntity<TKey>, new()
 {
-    //Task<ListViewModel<TEntity>> GetListPaginationAsync(int pageIndex, int pageSize);
-    //Task<List<TEntity>> GetOrderByIdAscendingAsync();
-    //Task<List<TEntity>> GetOrderByIdDescendingAsync();
-    //Task<int> GetCountAsync();
-
     Task<List<TEntity>> GetItemsAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
         Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default);
 
@@ -18,5 +13,5 @@ public interface ICoreDatabase<TEntity, TKey> : IDatabase<TEntity, TKey> where T
         OrderType orderType = OrderType.Ascending, CancellationToken cancellationToken = default);
 
     Task<int> GetItemsCountAsync(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> includes,
-    Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default);
+        Expression<Func<TEntity, bool>> condition, CancellationToken cancellationToken = default);
 }
