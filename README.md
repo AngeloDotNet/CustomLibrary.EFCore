@@ -1,9 +1,9 @@
 # Custom Library Entity Framework Core
 Collection of tools mostly used in my private and/or work projects thus avoiding the duplication of repetitive code.
 
-[![NuGet](https://img.shields.io/nuget/v/CustomLibrary.EFCore.svg?style=for-the-badge)](https://www.nuget.org/packages/CustomLibrary.EFCore)
-[![NuGet](https://img.shields.io/nuget/dt/CustomLibrary.EFCore.svg?style=for-the-badge)](https://www.nuget.org/packages/CustomLibrary.EFCore)
-[![GitHub License](https://img.shields.io/github/license/AngeloDotNet/CustomLibrary.EFCore?style=for-the-badge)](https://github.com/AngeloDotNet/CustomLibrary.EFCore/blob/main/LICENSE)
+[![NuGet](https://img.shields.io/nuget/v/CustomLibrary.EFCore.svg)](https://www.nuget.org/packages/CustomLibrary.EFCore)
+[![NuGet](https://img.shields.io/nuget/dt/CustomLibrary.EFCore.svg)](https://www.nuget.org/packages/CustomLibrary.EFCore)
+[![GitHub License](https://img.shields.io/github/license/AngeloDotNet/CustomLibrary.EFCore)](https://github.com/AngeloDotNet/CustomLibrary.EFCore/blob/main/LICENSE)
 
 ## :star: Give a star
 If you found this Implementation helpful or used it in your Projects, do give it a :star: on Github. Thanks!
